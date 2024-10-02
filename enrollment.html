@@ -4,14 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Manage Courses</title>
-    <script type="module" src="manage-courses.js"></script>
+    <title>Enroll in Courses</title>
+    <script type="module" src="enrollment.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0px;
             background-color: #f4f4f4;
             display: flex;
+            height: 100vh; /* Set body height to full viewport */
         }
 
         h1 {
@@ -28,6 +29,8 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            position: fixed; /* Make the sidebar fixed */
+            height: 100vh; /* Set sidebar height to full viewport */
         }
 
         .sidebar a {
@@ -47,7 +50,10 @@
 
         #content {
             flex: 1;
-            padding-left: 20px;
+            margin-left: 250px; /* Adjust for sidebar width */
+            padding: 20px; /* Add some padding */
+            overflow-y: auto; /* Allow vertical scrolling for content */
+            height: 100vh; /* Set content height to full viewport */
         }
 
         #coursesList {
@@ -72,47 +78,13 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
         }
 
-        .courseItem h3 {
-            margin: 0 0 10px 0;
-            color: #007BFF;
-        }
-
-        .courseItem p {
-            margin: 8px 0;
-            color: #555;
-            line-height: 1.6;
-        }
-
-        .courseDetails {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .courseDetails div {
-            flex: 1;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 10px;
-        }
-
-        .button {
+        .enrollButton {
             padding: 8px 16px;
+            background-color: #007bff;
+            color: white;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            color: #fff;
-        }
-
-        .editButton {
-            background-color: #28a745;
-        }
-
-        .deleteButton {
-            background-color: #dc3545;
         }
     </style>
 </head>
@@ -122,22 +94,19 @@
         <div>
             <h2>Course Management</h2>
             <a href="homepage.html">Home</a>
-            
             <a href="courses.html">Courses</a>
-            <a href="enrollment.html">Enroll in Courses</a> <!-- New Link -->
-            <a href="progress.html">Course Progress</a> <!-- New Link -->
-            <a href="courses.html">Courses</a>
+            <a href="enrollment.html">Enroll in Courses</a>
+            <a href="progress.html">Course Progress</a>
             <a href="teachers.html">Teachers</a>
             <a href="about.html">About Us</a>
             <a href="help.html">Help</a>
             <a href="settings.html">Settings</a>
             <a href="contact.html">Contact Us</a>
-            
         </div>
     </div>
 
     <div id="content">
-        <h1>Manage Courses</h1>
+        <h1>Available Courses</h1>
         <div id="coursesList"></div>
     </div>
 </body>

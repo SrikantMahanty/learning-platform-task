@@ -6,28 +6,169 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register & Login</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Google Font -->
-    <script type="module" src="firebaseauth.js"></script>
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            /* Applying the font */
+            margin: 0;
+            padding: 20px;
+            overflow: hidden;
+            background: linear-gradient(270deg, #4d99e4, #ff9966);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .welcome-heading {
             text-align: center;
             margin: 20px 0;
             font-size: 2.5em;
-            color: #333;
+            color: #fff;
+        }
+
+        .container {
+            background-color: #fff; /* White background for the container */
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* Increased shadow */
+            padding: 30px; /* Increased padding */
+            margin: 20px auto;
+            max-width: 400px; /* Center and limit width */
+            transition: transform 0.3s;
+        }
+
+        .container:hover {
+            transform: scale(1.02); /* Scale effect on hover */
+        }
+
+        .form-title {
+            text-align: center;
+            color: #4a4a4a;
+            font-size: 2em; /* Increased font size */
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px; /* Increased bottom margin */
+        }
+
+        .input-group input {
+            width: 80%; /* Full width for inputs */
+            padding: 15px 40px 15px 20px; /* Increased padding */
+            left: 3px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            
+            font-size: 1.1em; /* Increased font size */
+            transition: border-color 0.3s, box-shadow 0.3s; /* Added transition for box-shadow */
+        }
+
+        .input-group input:focus {
+            border-color: #007bff; /* Change border color on focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Added shadow on focus */
+            outline: none; /* Remove outline */
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 5px; /* Adjusted position */
+            top: 14px;
+            color: #007bff; /* Icon color */
+            font-size: 1.2em; /* Increased icon size */
+        }
+
+        .btn {
+            background-color: #007bff; /* Button color */
+            color: white;
+            border: none;
+            padding: 15px; /* Increased padding */
+            border-radius: 5px;
+            font-size: 1.1em; /* Increased font size */
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: background-color 0.3s, transform 0.2s; /* Added transform transition */
+        }
+
+        .btn:hover {
+            background-color: #0056b3; /* Darken on hover */
+            transform: translateY(-2px); /* Move button up slightly on hover */
+        }
+
+        .or {
+            text-align: center;
+            margin: 20px 0;
+            color: #666;
+            font-size: 1.1em; /* Increased font size */
+        }
+
+        .icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Increased gap */
+        }
+
+        .google-btn {
+            background-color: #db4437; /* Google button color */
+            transition: transform 0.2s; /* Added transition for scaling */
+        }
+
+        .facebook-btn {
+            background-color: #4267b2; /* Facebook button color */
+            transition: transform 0.2s; /* Added transition for scaling */
+        }
+
+        .google-btn:hover, .facebook-btn:hover {
+            transform: scale(1.05); /* Scale effect on hover */
+        }
+
+        .links {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .links button {
+            background: none;
+            border: none;
+            color: #007bff;
+            cursor: pointer;
+            text-decoration: underline;
+            font-size: 1em; /* Increased font size */
+        }
+
+        .messageDiv {
+            margin-bottom: 15px;
+            color: #d9534f; /* Error message color */
+            text-align: center;
+        }
+
+        @media (max-width: 500px) {
+            .container {
+                width: 90%; /* Responsive design */
+            }
+
+            .form-title {
+                font-size: 1.5em; /* Responsive font size */
+            }
         }
     </style>
+    <script type="module" src="firebaseauth.js"></script>
 </head>
 
 <body>
     <h2 class="welcome-heading">Welcome to the Online Learning Platform</h2>
-    <!-- Welcome Heading -->
 
     <div class="container" id="signup" style="display:none;">
         <h1 class="form-title">Register</h1>
@@ -36,37 +177,32 @@
             <div class="input-group">
                 <i class="fas fa-user"></i>
                 <input type="text" id="fName" placeholder="First Name" required>
-                <label for="fname">First Name</label>
             </div>
             <div class="input-group">
                 <i class="fas fa-user"></i>
                 <input type="text" id="lName" placeholder="Last Name" required>
-                <label for="lName">Last Name</label>
             </div>
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
                 <input type="email" id="rEmail" placeholder="Email" required>
-                <label for="rEmail">Email</label>
             </div>
             <div class="input-group">
                 <i class="fas fa-lock"></i>
                 <input type="password" id="rPassword" placeholder="Password" required>
-                <label for="rPassword">Password</label>
             </div>
-            <button class="btn" id="submitSignUp">Sign Up</button>
+            <button type="submit" class="btn" id="submitSignUp">Sign Up</button>
         </form>
         <p class="or">----------or--------</p>
         <div class="icons">
             <button id="googleSignUpButton" class="btn google-btn">
                 <i class="fab fa-google"></i> Sign Up with Google
             </button>
-            <!-- Facebook Sign-Up Button -->
             <button id="facebookSignUpButton" class="btn facebook-btn">
                 <i class="fab fa-facebook"></i> Sign Up with Facebook
             </button>
         </div>
         <div class="links">
-            <p>Already Have Account ?</p>
+            <p>Already Have Account?</p>
             <button id="signInButton">Sign In</button>
         </div>
     </div>
@@ -75,34 +211,30 @@
         <h1 class="form-title">Sign In</h1>
         <form method="post" action="">
             <div id="signInMessage" class="messageDiv" style="display:none;"></div>
-
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
                 <input type="email" id="email" placeholder="Email" required>
-                <label for="email">Email</label>
             </div>
             <div class="input-group">
                 <i class="fas fa-lock"></i>
                 <input type="password" id="password" placeholder="Password" required>
-                <label for="password">Password</label>
             </div>
             <p class="recover">
-                <a href="#">Recover Password</a>
+                <a href="#" style="color: #007bff; text-decoration: underline;">Recover Password</a>
             </p>
-            <button class="btn" id="submitSignIn">Sign In</button>
+            <button type="submit" class="btn" id="submitSignIn">Sign In</button>
         </form>
         <p class="or">----------or--------</p>
         <div class="icons">
             <button id="googleSignInButton" class="btn google-btn">
                 <i class="fab fa-google"></i> Sign In with Google
             </button>
-            <!-- Facebook Sign-In Button -->
             <button id="facebookSignInButton" class="btn facebook-btn">
                 <i class="fab fa-facebook"></i> Sign In with Facebook
             </button>
         </div>
         <div class="links">
-            <p>Don't have account yet?</p>
+            <p>Don't have an account yet?</p>
             <button id="signUpButton">Sign Up</button>
         </div>
     </div>
