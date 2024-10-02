@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profile</title>
+
+    <!-- Font Awesome Link -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body style="margin: 0; font-family: Arial, sans-serif;">
+    <!-- Header -->
+    <header class="header" style="background-color: #333; padding: 10px; color: #fff;">
+        <div class="flex" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <h1 style="font-size: 24px;">Education</h1>
+        </div>
+    </header>
+    <!-- header section end -->
+
+    <!-- Profile Section Start -->
+    <section class="profile" style="padding: 20px;">
+        <h1 class="heading" style="text-align: center;">Your Profile</h1>
+        <div class="main-content" style="text-align: center; padding: 20px;">
+            <h2>Welcome to Your Dashboard</h2>
+            <div class="user-info" style="margin: 10px 0;">First Name: <span id="loggedUserFName">Srikant</span></div>
+            <div class="user-info" style="margin: 10px 0;">Last Name: <span id="loggedUserLName">Mahanty</span></div>
+            <div class="user-info" style="margin: 10px 0;">Email: <span id="loggedUserEmail">example@example.com</span></div>
+            <div class="user-info" style="margin: 20px 0;">
+                <label for="profilePicUpload" style="display: block; margin: 10px 0;">Upload Profile Picture:</label>
+                <input type="file" id="profilePicUpload" accept="image/*" style="border: 1px solid #ccc; padding: 5px;"/>
+            </div>
+            <button id="uploadBtn" style="padding: 10px; background-color: #ff9800; color: #fff; border: none; cursor: pointer; margin: 5px;">Upload</button>
+            <button id="editProfileBtn" style="padding: 10px; background-color: #ff9800; color: #fff; border: none; cursor: pointer; margin: 5px;">Edit Profile</button>
+        </div>
+    </section>
+    <!-- Profile Section End -->
+
+    <!-- Footer -->
+    <footer class="footer" style="text-align: center; padding: 10px; background-color: #333; color: #fff;">
+        &copy; Copyright @ 2024 by <span>Srk Srk</span> | All rights reserved!
+    </footer>
+    <!-- footer end -->
+
+    <!-- Custom JS File -->
+    <script src="homepage.js"></script>
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>About Us</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            display: flex;
+        }
+
+        .sidebar {
+            background-color: #3f51b5;
+            color: white;
+            width: 250px;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .sidebar h2 {
+            margin-bottom: 20px;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background-color: #283593;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .about {
+            padding: 40px;
+        }
+
+        .row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .image {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .image img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .content {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .content h3 {
+            color: #3f51b5;
+        }
+
+        .content p {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .inline-btn {
+            background: #3f51b5;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .boxa-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 40px;
+        }
+
+        .boxa {
+            flex: 1;
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+        }
+
+        .boxa i {
+            font-size: 40px;
+            color: #3f51b5;
+        }
+
+        .boxa h3 {
+            color: #3f51b5;
+        }
+
+        .boxa span {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <div>
+            <h2>User Dashboard</h2>
+            <a href="homepage.html">Home</a>
+            <a href="profile.html">Profile</a>
+            <a href="settings.html">Settings</a>
+            <a href="notifications.html">Notifications</a>
+            <a href="courses.html">Courses</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="about.html">About Us</a>
+            <a href="help.html">Help</a>
+            <a href="contact.html">Contact Us</a>
+            <a href="#logout" id="logout">Logout</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <h1>About Us</h1>
+        <p>Welcome to the About Us page. Here you can find more information about our platform, mission, and team.</p>
+        <p>Our platform is dedicated to providing quality educational content and interactive learning experiences for students, teachers, and learners from all walks of life. With a wide range of courses, dedicated instructors, and a strong community, we aim to make learning accessible, enjoyable, and effective.</p>
+        <p>Our mission is to bridge the gap between knowledge and learners by providing tools and resources that cater to different learning styles and needs.</p>
+
+        <h2>Our Team</h2>
+        <p>Our team is made up of experienced educators, tech enthusiasts, and passionate individuals who are committed to making learning an enjoyable experience. We believe that education is the key to personal and professional growth, and our goal is to help our users achieve their full potential.</p>
+
+        <h2>Our Values</h2>
+        <ul>
+            <li>Accessibility: Making education available to everyone, anywhere, anytime.</li>
+            <li>Quality: Providing high-quality content curated by subject matter experts.</li>
+            <li>Community: Building a supportive learning environment for learners and educators.</li>
+        </ul>
+
+        <!-- About section starts -->
+        <section class="about">
+            <div class="row">
+                <div class="image">
+                    <img src="images/about.jfif" alt="About us image">
+                </div>
+                <div class="content">
+                    <h3>Why choose us?</h3>
+                    <p>We provide top-quality courses designed by industry experts to help you gain the skills you need to succeed. Our flexible learning options and experienced instructors make learning easy and accessible for everyone.</p>
+                    <a href="contact.html" class="inline-btn">Our courses</a>
+                </div>
+            </div>
+
+            <div class="boxa-container">
+                <div class="boxa">
+                    <i class="fas fa-graduation-cap" aria-label="graduation cap"></i>
+                    <div>
+                        <h3>+10K</h3>
+                        <span>Online courses</span>
+                    </div>
+                </div>
+
+                <div class="boxa">
+                    <i class="fas fa-user-graduate" aria-label="user graduate"></i>
+                    <div>
+                        <h3>+15K</h3>
+                        <span>Excellent students</span>
+                    </div>
+                </div>
+
+                <div class="boxa">
+                    <i class="fas fa-chalkboard-user" aria-label="chalkboard user"></i>
+                    <div>
+                        <h3>+1K</h3>
+                        <span>Expert teachers</span>
+                    </div>
+                </div>
+
+                <div class="boxa">
+                    <i class="fas fa-briefcase" aria-label="briefcase"></i>
+                    <div>
+                        <h3>+10K</h3>
+                        <span>Job offers</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- About section ends -->
+    </div>
+</body>
+
+</html>

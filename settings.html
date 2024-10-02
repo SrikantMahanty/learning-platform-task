@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --background-color: #ffffff; /* Light theme */
+            --text-color: #000000; /* Light theme */
+            --button-background: #3f51b5; /* Light theme */
+            --button-text-color: #ffffff; /* Light theme */
+        }
+
+        .dark-mode {
+            --background-color: #121212; /* Dark theme */
+            --text-color: #ffffff; /* Dark theme */
+            --button-background: #1e1e1e; /* Dark theme */
+            --button-text-color: #ffffff; /* Dark theme */
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .dashboard-container {
+            display: flex;
+            height: 100vh;
+        }
+
+        .sidebar {
+            background-color: #3f51b5;
+            color: white;
+            width: 250px;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 40px;
+            overflow-y: auto;
+            transition: background 0.3s;
+        }
+
+        .settings-form {
+            margin-top: 40px;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+        }
+
+        .dark-mode .settings-form {
+            background: #1e1e1e;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: auto;
+            padding: 20px;
+            background: #3f51b5;
+            color: white;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .dark-mode footer {
+            background: #1e1e1e;
+        }
+
+        .theme-selector {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>User Dashboard</h2>
+            <a href="homepage.html" style="color: white; text-decoration: none;">Home</a>
+            <a href="profile.html" style="color: white; text-decoration: none;">Profile</a>
+            <a href="settings.html" style="color: white; text-decoration: none; background-color: #303f9f;">Settings</a>
+            <a href="notifications.html" style="color: white; text-decoration: none;">Notifications</a>
+            <a href="courses.html" style="color: white; text-decoration: none;">Courses</a>
+            <a href="teachers.html" style="color: white; text-decoration: none;">Teachers</a>
+            <a href="about.html" style="color: white; text-decoration: none;">About Us</a>
+            <a href="help.html" style="color: white; text-decoration: none;">Help</a>
+            <a href="contact.html" style="color: white; text-decoration: none;">Contact Us</a>
+            <a href="#logout" id="logout" style="color: white; text-decoration: none;">Logout</a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <h1 style="text-align: center; color: #3f51b5;">Settings</h1>
+
+            <!-- Theme Selector -->
+            <div class="theme-selector">
+                <label for="themeSelect">Select Theme:</label>
+                <select id="themeSelect">
+                    <option value="light">Light</option>
+                    <option value="dark">Dark</option>
+                </select>
+            </div>
+
+            <!-- Settings Form Section -->
+            <section class="settings-form">
+                <h2 style="color: #3f51b5;">User Settings</h2>
+                <form action="#" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+                    <label for="username" style="font-weight: bold;">Username:</label>
+                    <input type="text" id="username" name="username" required placeholder="Enter your username" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+                    <label for="email" style="font-weight: bold;">Email:</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+                    <label for="password" style="font-weight: bold;">Password:</label>
+                    <input type="password" id="password" name="password" required placeholder="Enter new password" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+                    <label for="confirm-password" style="font-weight: bold;">Confirm Password:</label>
+                    <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your password" style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+                    <button type="submit" style="padding: 10px; border-radius: 5px; border: none; cursor: pointer;">Update Settings</button>
+                </form>
+            </section>
+            <!-- Settings Form End -->
+
+            <!-- Footer -->
+            <footer class="footer">
+                &copy; 2024 by <span>Srikant Mahanty</span> | All rights reserved!
+            </footer>
+            <!-- Footer End -->
+        </div>
+    </div>
+
+    <script>
+        // Theme change functionality
+        const themeSelect = document.getElementById('themeSelect');
+
+        themeSelect.addEventListener('change', () => {
+            if (themeSelect.value === 'dark') {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+
+        // Load theme from localStorage on page load
+        window.onload = () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                themeSelect.value = 'dark';
+                document.body.classList.add('dark-mode');
+            } else {
+                themeSelect.value = 'light';
+                document.body.classList.remove('dark-mode');
+            }
+        };
+    </script>
+</body>
+
+</html>
