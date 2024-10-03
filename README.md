@@ -24,6 +24,13 @@ Learning Materials:
 
 Support for videos, slideshows, PDFs, and interactive quizzes.
 
+Technologies Used-
+
+Frontend: HTML, CSS, JavaScript,Bootstrap
+Database: Firebase ,Firestore ,storage
+Authentication: Firebase, JWT (Google and Facebook login)
+Video Conferencing: WebRTC
+
 ![image](https://github.com/user-attachments/assets/917a37ca-34a8-48e3-9d63-d41a4d8f72e2)
 ![Screenshot (15)](https://github.com/user-attachments/assets/5a45988c-de90-46be-b9df-0acc3db1477e)
 ![image](https://github.com/user-attachments/assets/f8518a01-827e-4483-8601-daf6f464487c)
