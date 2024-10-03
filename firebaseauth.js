@@ -17,11 +17,14 @@ const app = initializeApp(firebaseConfig);
 // Show message function
 function showMessage(message, divId) {
     var messageDiv = document.getElementById(divId);
-    messageDiv.style.display = "block";
+    messageDiv.style.display = "block"; // Ensure it's visible
     messageDiv.innerHTML = message;
     messageDiv.style.opacity = 1;
     setTimeout(function() {
         messageDiv.style.opacity = 0;
+        setTimeout(() => {
+            messageDiv.style.display = "none"; // Hide it after fading out
+        }, 500); // Match with the duration
     }, 5000);    
 }
 
@@ -40,7 +43,7 @@ googleSignInButton.addEventListener('click', (event) => {
         })
         .catch((error) => {
             console.error('Error during Google sign-in:', error);
-            showMessage('Failed to sign in with Google', 'signInMessage');
+            showMessage('Failed to sign in with Google: ' + error.message, 'signInMessage');
         });
 });
 
@@ -59,7 +62,12 @@ facebookSignInButton.addEventListener('click', (event) => {
         })
         .catch((error) => {
             console.error('Error during Facebook sign-in:', error);
-            showMessage('Failed to sign in with Facebook', 'signInMessage');
+            const errorCode = error.code;
+            if (errorCode === 'auth/popup-closed-by-user') {
+                showMessage('The popup was closed before completing the sign-in.', 'signInMessage');
+            } else {
+                showMessage('Failed to sign in with Facebook: ' + error.message, 'signInMessage');
+            }
         });
 });
 
@@ -95,10 +103,10 @@ signUp.addEventListener('click', (event) => {
         })
         .catch((error) => {
             const errorCode = error.code;
-            if (errorCode == 'auth/email-already-in-use') {
+            if (errorCode === 'auth/email-already-in-use') {
                 showMessage('Email Address Already Exists !!!', 'signUpMessage');
             } else {
-                showMessage('Unable to create User', 'signUpMessage');
+                showMessage('Unable to create User: ' + error.message, 'signUpMessage');
             }
         });
 });
@@ -123,7 +131,7 @@ signIn.addEventListener('click', (event) => {
             if (errorCode === 'auth/invalid-credential') {
                 showMessage('Incorrect Email or Password', 'signInMessage');
             } else {
-                showMessage('Account does not Exist', 'signInMessage');
+                showMessage('Account does not Exist: ' + error.message, 'signInMessage');
             }
         });
 });

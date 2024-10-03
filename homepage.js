@@ -1,6 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
 import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 import { getFirestore, getDoc, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getStorage } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-storage.js";
 
 const firebaseConfig = {
     apiKey: "AIzaSyCBHKgdig2D6Fx4JnvYdLu9DNa9b4eaQSQ",
@@ -15,6 +16,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const db = getFirestore();
+const storage = getStorage(); // Initialize Firebase Storage
 
 // Authentication state listener
 onAuthStateChanged(auth, (user) => {
@@ -76,18 +78,19 @@ const handleCourseSubmission = async (event) => {
         .map(tag => tag.trim())
         .filter(tag => tag); // Remove empty tags
 
+    // Multimedia links (these can be adjusted if you have different inputs for these)
+    const multimediaLinks = {
+        videoUrl: document.querySelector('input[placeholder="Video URL"]').value.trim(),
+        slideshowUrl: document.querySelector('input[placeholder="Slideshow URL"]').value.trim(),
+        pdfUrl: document.querySelector('input[placeholder="PDF URL"]').value.trim(),
+        interactiveQuizUrl: document.querySelector('input[placeholder="Interactive Quiz URL"]').value.trim(),
+    };
+
     // Validate form data
     if (!courseTitle || !courseDescription || !lessonContent || !quizTitle || !quizQuestions.length || !category || !tags.length) {
         alert("Please fill out all fields correctly.");
         return;
     }
-
-    // Get multimedia URLs and files
-    const videoURL = document.querySelector('input[placeholder="Video URL"]').value.trim();
-    const slideshowURL = document.querySelector('input[placeholder="Slideshow URL"]').value.trim();
-    const pdfURL = document.querySelector('input[placeholder="PDF URL"]').value.trim();
-    const interactiveQuizURL = document.querySelector('input[placeholder="Interactive Quiz URL"]').value.trim();
-    const lectureNotes = document.querySelector('textarea[placeholder="Lecture Notes/Resources"]').value.trim();
 
     // Create course data object
     const courseData = {
@@ -100,14 +103,8 @@ const handleCourseSubmission = async (event) => {
         },
         category,
         tags,
-        multimedia: {
-            videoURL,
-            slideshowURL,
-            pdfURL,
-            interactiveQuizURL,
-        },
-        lectureNotes,
-        createdAt: new Date(),
+        createdAt: new Date(), // Store the creation date
+        multimediaLinks, // Add multimedia links to the course data
     };
 
     // Save course to Firestore

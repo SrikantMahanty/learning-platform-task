@@ -42,24 +42,23 @@ async function fetchCourses() {
 // Helper function to create course HTML
 function createCourseHTML(courseData, courseId) {
     return `
-        <h3>${courseData.title}</h3>
+        <h3>${courseData.title || 'N/A'}</h3>
         <div class="courseDetails">
-            <div><strong>User ID:</strong> ${courseData.userId || 'N/A'}</div> <!-- Display userId here -->
+            <div><strong>User ID:</strong> ${courseData.userId || 'N/A'}</div>
             <div><strong>Category:</strong> ${courseData.category || 'N/A'}</div>
             <div><strong>Tags:</strong> ${courseData.tags?.join(', ') || 'N/A'}</div>
             <div><strong>Lesson Content:</strong> ${courseData.lessonContent || 'N/A'}</div>
             <div><strong>Description:</strong> ${courseData.description || 'N/A'}</div>
-            <div><strong>Lecture Notes:</strong> ${courseData.lectureNotes || 'N/A'}</div>
-            <div><strong>Quiz Title:</strong> ${courseData.quiz?.title || 'N/A'}</div>
-            <div><strong>Quiz Questions:</strong> ${courseData.quiz?.questions.join(', ') || 'N/A'}</div>
-            <div><strong>Created At:</strong> ${courseData.createdAt ? new Date(courseData.createdAt).toLocaleString() : 'N/A'}</div>
+            <div><strong>Created At:</strong> ${courseData.createdAt ? new Date(courseData.createdAt.seconds * 1000).toLocaleString() : 'N/A'}</div>
             <div><strong>Multimedia Links:</strong></div>
             <ul>
-                <li><strong>Video URL:</strong> <a href="${courseData.multimedia?.videoURL || '#'}" target="_blank">${courseData.multimedia?.videoURL || 'N/A'}</a></li>
-                <li><strong>Slideshow URL:</strong> <a href="${courseData.multimedia?.slideshowURL || '#'}" target="_blank">${courseData.multimedia?.slideshowURL || 'N/A'}</a></li>
-                <li><strong>PDF URL:</strong> <a href="${courseData.multimedia?.pdfURL || '#'}" target="_blank">${courseData.multimedia?.pdfURL || 'N/A'}</a></li>
-                <li><strong>Interactive Quiz URL:</strong> <a href="${courseData.multimedia?.interactiveQuizURL || '#'}" target="_blank">${courseData.multimedia?.interactiveQuizURL || 'N/A'}</a></li>
+                <li><strong>Video URL:</strong> <a href="${courseData.multimediaLinks?.videoUrl || '#'}" target="_blank">${courseData.multimediaLinks?.videoUrl || 'N/A'}</a></li>
+                <li><strong>Slideshow URL:</strong> <a href="${courseData.multimediaLinks?.slideshowUrl || '#'}" target="_blank">${courseData.multimediaLinks?.slideshowUrl || 'N/A'}</a></li>
+                <li><strong>PDF URL:</strong> <a href="${courseData.multimediaLinks?.pdfUrl || '#'}" target="_blank">${courseData.multimediaLinks?.pdfUrl || 'N/A'}</a></li>
+                <li><strong>Interactive Quiz URL:</strong> <a href="${courseData.multimediaLinks?.interactiveQuizUrl || '#'}" target="_blank">${courseData.multimediaLinks?.interactiveQuizUrl || 'N/A'}</a></li>
             </ul>
+            <div><strong>Quiz Title:</strong> ${courseData.quiz?.title || 'N/A'}</div>
+            <div><strong>Quiz Questions:</strong> ${courseData.quiz?.questions?.join(', ') || 'N/A'}</div>
         </div>
         <div class="buttons">
             <button class="button editButton" onclick="editCourse('${courseId}')">Edit</button>

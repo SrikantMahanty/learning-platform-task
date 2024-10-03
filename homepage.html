@@ -156,11 +156,6 @@
             border-color: #3f51b5;
             box-shadow: 0 0 5px rgba(63, 81, 181, 0.5);
         }
-
-        /* File input styles */
-        .file-input {
-            margin-bottom: 15px;
-        }
     </style>
     <script type="module" src="./homepage.js"></script>
 </head>
@@ -173,7 +168,6 @@
                 <h2>User Dashboard</h2>
                 <a href="homepage.html"><i class="fas fa-home"></i> <span>Home</span></a>
                 <a href="profile.html"><i class="fas fa-user"></i> <span>Profile</span></a>
-                
                 <a href="notifications.html"><i class="fas fa-bell"></i> <span>Notifications</span></a>
                 <a href="courses.html"><i class="fas fa-graduation-cap"></i> <span>Courses</span></a>
                 <a href="teachers.html"><i class="fas fa-chalkboard-teacher"></i> <span>Teachers</span></a>
@@ -213,22 +207,11 @@
                         <option value="business">Business</option>
                     </select>
                     <input type="text" placeholder="Tags (comma-separated)">
-                    
-                    <!-- New fields for multimedia content -->
                     <input type="text" placeholder="Video URL" required>
-                    <input type="file" class="file-input" accept="video/*" required>
-                    
                     <input type="text" placeholder="Slideshow URL" required>
-                    <input type="file" class="file-input" accept=".ppt,.pptx,.pdf" required>
-                    
                     <input type="text" placeholder="PDF URL" required>
-                    <input type="file" class="file-input" accept=".pdf" required>
-                    
                     <input type="text" placeholder="Interactive Quiz URL" required>
-                    <input type="file" class="file-input" accept=".html,.pdf,.pptx" required>
-                    
                     <textarea placeholder="Lecture Notes/Resources" rows="4" required></textarea>
-                    <input type="file" class="file-input" accept=".doc,.docx,.pdf" required>
 
                     <button type="submit">Publish Course</button>
                 </form>
