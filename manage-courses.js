@@ -44,7 +44,7 @@ function createCourseHTML(courseData, courseId) {
     return `
         <h3>${courseData.title || 'N/A'}</h3>
         <div class="courseDetails">
-            <div><strong>User ID:</strong> ${courseData.userId || 'N/A'}</div>
+         
             <div><strong>Category:</strong> ${courseData.category || 'N/A'}</div>
             <div><strong>Tags:</strong> ${courseData.tags?.join(', ') || 'N/A'}</div>
             <div><strong>Lesson Content:</strong> ${courseData.lessonContent || 'N/A'}</div>

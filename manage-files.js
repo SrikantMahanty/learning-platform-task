@@ -53,57 +53,99 @@ document.addEventListener('DOMContentLoaded', function () {
             deleteFileFromLocalStorage(file.name);
         });
 
-        // Add watch/view button if the file type is video
+        // Add watch/view button depending on the file type
         if (fileType === 'video' && file.type === 'video/mp4') {
-            const watchButton = document.createElement('button');
-            watchButton.classList.add('button');
-            watchButton.style.cssText = `
-                padding: 8px 16px;
-                border: none;
-                border-radius: 5px;
-                cursor: pointer;
-                color: #fff;
-                background-color: #28a745;
-            `;
-            watchButton.innerText = 'Watch Video';
-
-            // Add event listener for watching video
-            watchButton.addEventListener('click', function () {
-                const videoModal = document.createElement('div');
-                videoModal.style.cssText = `
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    width: 100%;
-                    height: 100%;
-                    background: rgba(0, 0, 0, 0.8);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 1000;
-                `;
-
-                const videoPlayer = document.createElement('video');
-                videoPlayer.controls = true;
-                videoPlayer.style.cssText = 'max-width: 90%; max-height: 90%;';
-                videoPlayer.src = URL.createObjectURL(file);
-
-                videoModal.appendChild(videoPlayer);
-
-                // Close the modal when clicking outside the video
-                videoModal.addEventListener('click', function (e) {
-                    if (e.target === videoModal) {
-                        document.body.removeChild(videoModal);
-                    }
-                });
-
-                document.body.appendChild(videoModal);
-            });
-
-            fileItem.querySelector('.buttons').appendChild(watchButton);
+            addWatchButton(fileItem, file);
+        } else if (fileType === 'pdf' && file.type === 'application/pdf') {
+            addViewButton(fileItem, file, 'View PDF');
+        } else if (fileType === 'slideshow' && (file.type === 'application/vnd.openxmlformats-officedocument.presentationml.presentation' || file.type === 'application/vnd.ms-powerpoint')) {
+            addViewButton(fileItem, file, 'View Slideshow');
         }
 
         filesList.appendChild(fileItem);
+    }
+
+    // Add watch button for videos
+    function addWatchButton(fileItem, file) {
+        const watchButton = document.createElement('button');
+        watchButton.classList.add('button');
+        watchButton.style.cssText = `
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #28a745;
+        `;
+        watchButton.innerText = 'Watch Video';
+
+        // Add event listener for watching video
+        watchButton.addEventListener('click', function () {
+            const videoModal = createModal();
+            const videoPlayer = document.createElement('video');
+            videoPlayer.controls = true;
+            videoPlayer.style.cssText = 'max-width: 90%; max-height: 90%;';
+            videoPlayer.src = URL.createObjectURL(file);
+
+            videoModal.appendChild(videoPlayer);
+            document.body.appendChild(videoModal);
+        });
+
+        fileItem.querySelector('.buttons').appendChild(watchButton);
+    }
+
+    // Add view button for PDFs and slideshows
+    function addViewButton(fileItem, file, buttonText) {
+        const viewButton = document.createElement('button');
+        viewButton.classList.add('button');
+        viewButton.style.cssText = `
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #17a2b8;
+        `;
+        viewButton.innerText = buttonText;
+
+        // Add event listener for viewing content
+        viewButton.addEventListener('click', function () {
+            const viewModal = createModal();
+            const iframe = document.createElement('iframe');
+            iframe.style.cssText = 'width: 90%; height: 90%; border: none;';
+            iframe.src = URL.createObjectURL(file);
+
+            viewModal.appendChild(iframe);
+            document.body.appendChild(viewModal);
+        });
+
+        fileItem.querySelector('.buttons').appendChild(viewButton);
+    }
+
+    // Create a modal element
+    function createModal() {
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        `;
+
+        // Close the modal when clicking outside the content
+        modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+                document.body.removeChild(modal);
+            }
+        });
+
+        return modal;
     }
 
     // Save file details to localStorage

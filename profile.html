@@ -1,51 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Profile</title>
-
-    <!-- Font Awesome Link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <script type="module" src="profile.js"></script> <!-- Link to the external JavaScript file -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #e9ecef; /* Light gray background */
+        }
+        .profile-container {
+            max-width: 600px;
+            margin: auto;
+            background: #ffffff; /* White background for the container */
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+        h1 {
+            text-align: center;
+            color: #343a40; /* Dark gray for the heading */
+            margin-bottom: 20px;
+        }
+        .user-info {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ced4da; /* Light gray border */
+            border-radius: 8px;
+            background-color: #f8f9fa; /* Slightly off-white background for user info */
+            text-align: center; /* Centered text */
+        }
+        .user-info p {
+            font-size: 18px;
+            color: #495057; /* Darker gray for text */
+            margin: 10px 0;
+        }
+        #logout {
+            display: block;
+            margin: 20px auto;
+            padding: 12px 25px;
+            background: #dc3545; /* Bootstrap danger color */
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s; /* Smooth transition for hover effect */
+        }
+        #logout:hover {
+            background: #c82333; /* Darker red on hover */
+        }
+        .edit-profile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .edit-profile input[type="file"] {
+            display: none; /* Hide the file input */
+        }
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            object-fit: cover;
+            border: 2px solid #ced4da; /* Border for the profile picture */
+        }
+        .edit-button, .save-button {
+            padding: 12px 25px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: background 0.3s; /* Smooth transition for hover effect */
+        }
+        .edit-button {
+            background: #007bff; /* Bootstrap primary color */
+            color: white;
+        }
+        .edit-button:hover {
+            background: #0056b3; /* Darker blue on hover */
+        }
+        .save-button {
+            background: #28a745; /* Bootstrap success color */
+            color: white;
+        }
+        .save-button:hover {
+            background: #218838; /* Darker green on hover */
+        }
+    </style>
 </head>
-<body style="margin: 0; font-family: Arial, sans-serif;">
-    <!-- Header -->
-    <header class="header" style="background-color: #333; padding: 10px; color: #fff;">
-        <div class="flex" style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
-            <h1 style="font-size: 24px;">Education</h1>
+<body>
+
+    <div class="profile-container">
+        <h1>User Profile</h1>
+        <div class="user-info">
+            <img id="profilePic" class="profile-pic" src="default-profile-pic.png" alt="Profile Picture"> <!-- Placeholder image -->
+            <p><strong>First Name:</strong> <span id="loggedUserFName"></span></p>
+            <p><strong>Last Name:</strong> <span id="loggedUserLName"></span></p>
+            <p><strong>Email:</strong> <span id="loggedUserEmail"></span></p>
         </div>
-    </header>
-    <!-- header section end -->
-
-    <!-- Profile Section Start -->
-    <section class="profile" style="padding: 20px;">
-        <h1 class="heading" style="text-align: center;">Your Profile</h1>
-        <div class="main-content" style="text-align: center; padding: 20px;">
-            <h2>Welcome to Your Dashboard</h2>
-            <div class="user-info" style="margin: 10px 0;">First Name: <span id="loggedUserFName">Srikant</span></div>
-            <div class="user-info" style="margin: 10px 0;">Last Name: <span id="loggedUserLName">Mahanty</span></div>
-            <div class="user-info" style="margin: 10px 0;">Email: <span id="loggedUserEmail">example@example.com</span></div>
-            <div class="user-info" style="margin: 20px 0;">
-                <label for="profilePicUpload" style="display: block; margin: 10px 0;">Upload Profile Picture:</label>
-                <input type="file" id="profilePicUpload" accept="image/*" style="border: 1px solid #ccc; padding: 5px;"/>
-            </div>
-            <button id="uploadBtn" style="padding: 10px; background-color: #ff9800; color: #fff; border: none; cursor: pointer; margin: 5px;">Upload</button>
-            <button id="editProfileBtn" style="padding: 10px; background-color: #ff9800; color: #fff; border: none; cursor: pointer; margin: 5px;">Edit Profile</button>
+        <div class="edit-profile">
+            <label for="fileUpload" class="edit-button">Upload Profile Picture</label>
+            <input type="file" id="fileUpload" accept="image/*">
+            <button id="editProfile" class="edit-button">Edit Profile</button>
+            <button id="saveProfile" class="save-button" style="display: none;">Save Changes</button>
         </div>
-    </section>
-    <!-- Profile Section End -->
+        <button id="logout">Logout</button>
+    </div>
 
-    <!-- Footer -->
-    <footer class="footer" style="text-align: center; padding: 10px; background-color: #333; color: #fff;">
-        &copy; Copyright @ 2024 by <span>Srk Srk</span> | All rights reserved!
-    </footer>
-    <!-- footer end -->
-
-    <!-- Custom JS File -->
-    <script src="homepage.js"></script>
 </body>
 </html>

@@ -6,38 +6,136 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Files</title>
     <script type="module" src="manage-files.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .sidebar {
+            background-color: #3f51b5;
+            color: white;
+            width: 250px;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: fixed;
+            height: 100%;
+        }
+
+        .sidebar a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 12px;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .sidebar a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        #content {
+            flex: 1;
+            margin-left: 250px;
+            padding: 20px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .uploadForm {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 20px;
+            max-width: 800px;
+            margin: auto;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .uploadForm:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .uploadForm h2 {
+            color: #007BFF;
+        }
+
+        #fileType,
+        #fileInput,
+        .uploadButton {
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .uploadButton {
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            background-color: #007BFF;
+        }
+
+        #filesList {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 800px;
+            margin: auto;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 
-<body style="font-family: Arial, sans-serif; margin: 0px; background-color: #f4f4f4; display: flex;">
-    <div class="sidebar" style="background-color: #3f51b5; color: white; width: 250px; padding: 20px; box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); display: flex; flex-direction: column; justify-content: space-between;">
+<body>
+    <div class="sidebar">
         <div>
-            <h2 style="margin: 0;">File Management</h2>
-            <a href="homepage.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Home</a>
-            <a href="courses.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Courses</a>
-            <a href="enrollment.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Enroll in Courses</a>
-            <a href="progress.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Course Progress</a>
-            <a href="teachers.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Teachers</a>
-            <a href="about.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">About Us</a>
-            <a href="help.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Help</a>
-            <a href="settings.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Settings</a>
-            <a href="contact.html" style="color: white; text-decoration: none; display: flex; align-items: center; margin: 10px 0; padding: 12px; border-radius: 8px; transition: background 0.3s;">Contact Us</a>
+            <h2>File Management</h2>
+            <a href="homepage.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="enrollment.html">Enroll in Courses</a>
+            <a href="progress.html">Course Progress</a>
+            <a href="teachers.html">Teachers</a>
+            <a href="about.html">About Us</a>
+            <a href="help.html">Help</a>
+            <a href="settings.html">Settings</a>
+            <a href="contact.html">Contact Us</a>
         </div>
     </div>
 
-    <div id="content" style="flex: 1; padding-left: 20px;">
-        <h1 style="text-align: center; color: #333;">Manage Files</h1>
-        <div class="uploadForm" style="display: flex; flex-direction: column; gap: 10px; margin-top: 20px;">
+    <div id="content">
+        <h1>Manage Files</h1>
+        <div class="uploadForm">
             <h2>Upload Learning Materials</h2>
-            <select id="fileType" style="padding: 10px; border-radius: 5px;">
+            <select id="fileType">
                 <option value="video">Video</option>
                 <option value="slideshow">Slideshow</option>
                 <option value="pdf">PDF</option>
                 <option value="quiz">Interactive Quiz</option>
             </select>
-            <input type="file" id="fileInput" accept=".mp4,.pdf,.pptx,.html,.zip" style="padding: 10px;" />
-            <button class="button uploadButton" id="uploadFileButton" style="padding: 8px 16px; border: none; border-radius: 5px; cursor: pointer; color: #fff; background-color: #007BFF;">Upload File</button>
+            <input type="file" id="fileInput" accept=".mp4,.pdf,.pptx,.html,.zip" />
+            <button class="button uploadButton" id="uploadFileButton">Upload File</button>
         </div>
-        <div id="filesList" style="display: flex; flex-direction: column; gap: 15px; max-width: 800px; margin: auto;"></div>
+        <div id="filesList"></div>
     </div>
 </body>
 
