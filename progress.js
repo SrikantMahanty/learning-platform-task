@@ -1,5 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-app.js";
-import { getFirestore, collection, getDocs, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getFirestore, collection, getDocs, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.11.1/firebase-auth.js";
 
 // Firebase configuration
 const firebaseConfig = {
@@ -14,11 +15,11 @@ const firebaseConfig = {
 // Initialize Firebase and Firestore
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
 const progressList = document.getElementById("progressList");
-const userId = "mcWYuHCePmPDh2Es91Pp4pMAi8n2"; // Replace with actual user ID logic
 
 // Fetch user's enrolled courses and progress
-const fetchProgress = async () => {
+const fetchProgress = async (userId) => {
     try {
         const querySnapshot = await getDocs(collection(db, "enrollments")); // Access the enrollments collection
         querySnapshot.forEach((doc) => {
@@ -48,9 +49,21 @@ const fetchProgress = async () => {
 // Mark course as complete
 const markAsComplete = async (enrollmentId, courseId) => {
     try {
+        const userId = auth.currentUser?.uid; // Get current user's ID
+        if (!userId) {
+            alert("No user is signed in.");
+            return;
+        }
+
         // Fetch the current enrollment data
         const enrollmentDoc = doc(db, "enrollments", enrollmentId);
-        const enrollmentSnapshot = await getDocs(enrollmentDoc);
+        const enrollmentSnapshot = await getDoc(enrollmentDoc); // Use getDoc() to get a single document
+
+        if (!enrollmentSnapshot.exists()) {
+            console.error("Enrollment document not found");
+            return;
+        }
+
         const enrollmentData = enrollmentSnapshot.data();
 
         // Increment the completed lessons
@@ -74,7 +87,7 @@ const markAsComplete = async (enrollmentId, courseId) => {
 
         // Refresh the progress list
         progressList.innerHTML = ''; // Clear current list
-        fetchProgress(); // Refetch progress
+        fetchProgress(userId); // Refetch progress
     } catch (error) {
         console.error("Error marking course as complete:", error);
     }
@@ -83,5 +96,11 @@ const markAsComplete = async (enrollmentId, courseId) => {
 // Attach markAsComplete to the window object
 window.markAsComplete = markAsComplete;
 
-// Fetch progress on page load
-fetchProgress();
+// Monitor authentication state and fetch progress when a user is logged in
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        fetchProgress(user.uid); // Pass user ID to fetch enrolled courses and progress
+    } else {
+        alert("No user is signed in.");
+    }
+});
